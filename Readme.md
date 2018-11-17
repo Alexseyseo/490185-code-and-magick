@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Aleksey Suprun](https://up.htmlacademy.ru/javascript/16/user/490185).
-* Наставник: `Неизвестно`.
+* Наставник: [Арсений Ильяшов](https://up.htmlacademy.ru/javascript/16/user/40943).
 
 ---
 
