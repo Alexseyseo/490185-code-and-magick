@@ -26,7 +26,7 @@ var getMaxElement = function (arr) {
   }
 
   return maxElement;
-}
+};
 
 var getArrayStrings = function (str) {
   var arrStrings = str.split('\n');
@@ -40,11 +40,11 @@ var renderHeading = function (ctx, str) {
   for (var i = 0; i < lines.length; i++) {
     ctx.fillText(lines[i], CLOUD_X + CLOUD_PADDING_X, CLOUD_Y + CLOUD_PADDING_Y + (TEXT_HEIGHT * i));
   }
-}
+};
 
 window.renderStatistics = function (ctx, names, times) {
   var heading = 'Ура вы победили!\nСписок результатов:'; // Задаем строку поздравления
-  var numberHeaderLines = getArrayStrings(heading).length; // Получаем количество линий в заголовке для дальнейших подсчетов
+  var numberHeaderLines = getArrayStrings(heading).length; // Получаем количество строк в заголовке для дальнейших подсчетов
   var histogramY = CLOUD_Y + CLOUD_PADDING_Y + (TEXT_HEIGHT * numberHeaderLines) + TEXT_HEIGHT; // Получаем верхнюю координату для гистограммы относительно того, сколько будет строк в заголовке поздравления и добавляем еще отступ(TEXT_HEIGHT) для размещения резульатта
   var maxTime = getMaxElement(times); // Получаем максимальное время среди всех игроков
 
@@ -55,34 +55,20 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   for (var i = 0; i < names.length; i++) {
     var paddingTopHistogram = HISTOGRAM_HEIGTH - (HISTOGRAM_HEIGTH * times[i]) / maxTime; // подсчет отступа для выравнивания блоков по нижней линии
-    var playerX = CLOUD_X + CLOUD_PADDING_X + (COLUMN_WIDTH + COLUMN_GAP) * i;
+    var playerX = CLOUD_X + CLOUD_PADDING_X + (COLUMN_WIDTH + COLUMN_GAP) * i; // Т.к. код повторяется для каждого элемента, вынес в отдельную переменную координату X для отдельного игрока
 
     ctx.fillStyle = '#000000';
-    ctx.fillText(
-      names[i], // Выводим имя
-      playerX, // координата x
-      histogramY + HISTOGRAM_HEIGTH + TEXT_HEIGHT // координата y
-    );
-
-    ctx.fillText(
-      // Вопрос: Т.к. нам надо еще округлить время, будет ли правильнее убрать данное выражение в переменную выше, а сюда вставлять саму переменную, для читабельности? или так тоже приемлимо?
-      Math.round(times[i]), // Округляем до целых и выводим время текущего игрока
-      playerX, // координата x
-      histogramY + paddingTopHistogram - 10//- TEXT_HEIGHT // координата y
-    );
+    ctx.fillText(names[i], playerX, histogramY + HISTOGRAM_HEIGTH + TEXT_HEIGHT);
+    // Вопрос: Т.к. нам надо еще округлить время, будет ли правильнее убрать выражение(Math.round(times[i])) в переменную, а сюда вставлять саму переменную, для читабельности?
+    ctx.fillText(Math.round(times[i]), playerX, histogramY + paddingTopHistogram - 10);
 
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      var randomOpacity = Math.ceil((Math.random()*10))/10;
+      var randomOpacity = Math.ceil((Math.random() * 10)) / 10;
       ctx.fillStyle = 'rgba(0, 0, 255, ' + randomOpacity + ')';
     }
 
-    ctx.fillRect(
-      playerX,// координата x
-      histogramY + paddingTopHistogram,// координата y
-      COLUMN_WIDTH,// ширина колонки
-      (HISTOGRAM_HEIGTH * times[i]) / maxTime// Высота в пропорции относительно максимального времени
-    );
+    ctx.fillRect(playerX, histogramY + paddingTopHistogram, COLUMN_WIDTH, (HISTOGRAM_HEIGTH * times[i]) / maxTime);
   }
 };
