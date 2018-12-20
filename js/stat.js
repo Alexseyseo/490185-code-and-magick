@@ -59,12 +59,7 @@ window.renderStatistics = function (ctx, names, times) {
 
     ctx.fillStyle = '#000000';
     ctx.fillText(names[i], playerX, histogramY + HISTOGRAM_HEIGTH + TEXT_HEIGHT);
-<<<<<<< HEAD
     // Вопрос: Т.к. нам надо еще округлить время, будет ли правильнее убрать выражение(Math.round(times[i])) в переменную, а сюда вставлять саму переменную, для читабельности?
-=======
-
-    // Вопрос: Т.к. нам надо еще округлить время, будет ли правильнее убрать данное выражение в переменную выше, а сюда вставлять саму переменную, для читабельности? или так тоже приемлимо?
->>>>>>> 328024d47f5ca587dfa6d03cba5b8bc45ecab639
     ctx.fillText(Math.round(times[i]), playerX, histogramY + paddingTopHistogram - 10);
 
     if (names[i] === 'Вы') {
@@ -74,11 +69,6 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'rgba(0, 0, 255, ' + randomOpacity + ')';
     }
 
-<<<<<<< HEAD
     ctx.fillRect(playerX, histogramY + paddingTopHistogram, COLUMN_WIDTH, (HISTOGRAM_HEIGTH * times[i]) / maxTime);
-=======
-    ctx.fillRect(playerX, histogramY + paddingTopHistogram, COLUMN_WIDTH, (HISTOGRAM_HEIGTH * times[i]) / maxTime
-    );
->>>>>>> 328024d47f5ca587dfa6d03cba5b8bc45ecab639
   }
 };
