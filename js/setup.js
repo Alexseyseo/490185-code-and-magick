@@ -1,3 +1,5 @@
+'use strict';
+
 // 1
 var modal = document.querySelector('.setup');
 modal.classList.remove('hidden');
@@ -21,8 +23,7 @@ var getRandomColorEyes = function () {
 };
 var createNewHeroes = function (countHeroes) {
   var arrHeroes = [];
-
-  for (var i =  1; i <= countHeroes; i++) {
+  for (var i = 1; i <= countHeroes; i++) {
     var hero = {
       name: getRandomName(),
       coatColor: getRandomColorCoat(),
